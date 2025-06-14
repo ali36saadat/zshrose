@@ -2,8 +2,6 @@ import chalk from "chalk";
 import fs from "fs";
 
 const error = function (msg) {
-    console.log("Current directory:");
-
     const filePath = `${process.cwd()}/src/error-handler/error-list.json`;
 
     const data = fs.readFileSync(filePath, "utf-8");
