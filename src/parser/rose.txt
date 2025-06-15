@@ -1,0 +1,3 @@
+   - ZSH ROSE - BETA -
+    - ALIAS ZSH CLI -
+- Developer : Ali Saadat -
