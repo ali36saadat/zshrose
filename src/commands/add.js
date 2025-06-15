@@ -6,7 +6,8 @@ import path from "path";
 const add = function (name, command) {
     const zshrcPath = path.join(os.homedir(), ".zshrc");
 
-    const blockToAppend = `alias ${name} = "${command}"`;
+    const blockToAppend = `\n alias ${name} = "${command}"`;
+    console.log(zshrcPath);
 
     try {
         if (!fs.existsSync(zshrcPath)) {
