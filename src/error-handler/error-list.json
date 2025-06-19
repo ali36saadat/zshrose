@@ -2,4 +2,5 @@
     "Not Found": "Command Not Found",
     "Add Need Params": "Add Command Requires 2 Parameters",
     "Alias Not Found": "Alias Not Found"
+    "Alias Name Exits": "Alias Name Exits"
 }
