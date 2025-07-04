@@ -1,6 +1,7 @@
 import add from "../commands/add.js";
 import error from "../error-handler/error-handler.js";
 import edit from "./edit.js";
+import list from "./list.js";
 import remove from "./remove.js";
 
 const commands = {
@@ -28,6 +29,14 @@ const commands = {
         handler: (args) => {
             const name = args[0];
             name ? remove(name) : error("123");
+        },
+    },
+    "-l": {
+        id: 0,
+        name: "remove",
+        handler: (args) => {
+            const startsWith = args[0];
+            list(startsWith);
         },
     },
 };
