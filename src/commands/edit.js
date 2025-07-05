@@ -1,29 +1,20 @@
 import chalk from "chalk";
-import fs from "fs";
-import os from "os";
-import path from "path";
 import error from "../error-handler/error-handler.js";
+import ioHandler from "../scripts/ioHandler.js";
 
 const edit = function (name, command) {
-    const zshrcPath = path.join(os.homedir(), ".zshrc");
-    const aliasRegex = new RegExp(`^\\s*alias\\s+${name}\\s*=.*$`, "m");
+    const IO = new ioHandler();
+    const zshFile = IO.read();
+
     const newAlias = `alias ${name}="${command}"`;
+    const aliasRegex = new RegExp(`^\\s*alias\\s+${name}\\s*=.*$`, "m");
 
-    try {
-        if (!fs.existsSync(zshrcPath)) {
-            process.exit(1);
-        }
-
-        let content = fs.readFileSync(zshrcPath, "utf-8");
-
-        if (aliasRegex.test(content)) {
-            content = content.replace(aliasRegex, newAlias);
-            fs.writeFileSync(zshrcPath, content, "utf-8");
-        } else {
-            error("Alias Not Found");
-        }
-    } catch (err) {
-        console.error(err.message);
+    if (aliasRegex.test(zshFile)) {
+        const newZshFile = zshFile.replace(aliasRegex, newAlias);
+        IO.write(newZshFile);
+        console.log(chalk.bold.cyanBright("Alias Edited"));
+    } else {
+        error("err003");
     }
 };
 

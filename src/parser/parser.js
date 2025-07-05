@@ -1,37 +1,35 @@
-import chalk from "chalk";
-import commands from "../commands/commands.js";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import cli from "../commands/commands.js";
+import error from "../error-handler/error-handler.js";
 
 const parser = function () {
-    const args = process.argv.slice(2);
+    try {
+        const args = process.argv.slice(2);
 
-    if (args.length === 0) {
-        rose();
-        process.exit(1);
+        let flag = commands[args[0]];
+
+        if (!args.length) {
+            flag = "about";
+        }
+
+        const commandModule = cli[flag];
+        const providedArgs = args.slice(1);
+
+        commandModule.handler(providedArgs);
+    } catch (err) {
+        error(err);
     }
-
-    const flag = args[0];
-
-    if (!commands[flag]) {
-        process.exit(1);
-    }
-
-    const command = commands[flag];
-    const providedArgs = args.slice(1);
-
-    command.handler(providedArgs);
 };
 
-const rose = function () {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-
-    const filePath = path.join(__dirname, "rose.txt");
-    const content = fs.readFileSync(filePath, "utf-8");
-
-    console.log(chalk.blue(content));
+const commands = {
+    "--about": "about",
+    "-a": "add",
+    "--add": "add",
+    "-e": "edit",
+    "--edit": "edit",
+    "-r": "remove",
+    "--remove": "remove",
+    "-l": "list",
+    "--list": "list",
 };
 
 export default parser;
