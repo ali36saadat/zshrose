@@ -1,22 +1,25 @@
 import chalk from "chalk";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
 
 const error = function (msg) {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-
-    const filePath = path.join(__dirname, "error-list.json");
-
-    const data = fs.readFileSync(filePath, "utf-8");
-    const list = JSON.parse(data);
-
-    if (list[msg]) {
-        console.log(chalk.red.bold(list[msg]));
+    if (errorList[msg]) {
+        console.log(chalk.bgRed.bold(" ERROR "), chalk.redBright.bold(errorList[msg]));
+    } else if (msg.message) {
+        console.log(chalk.bgRed.bold(" ERROR "), chalk.redBright.bold(msg.message));
     } else {
-        console.log(chalk.rgb(255, 0, 0).bold("ERROR HANDLER"), chalk.rgb(255, 0, 0)("Not Found Error"));
+        const OSC = "\u001B]8;;";
+        const ST = "\u001B\\";
+        const link = "https://github.com/ali36saadat/zshrose";
+        const label = "Help Us By Reporting This Issue";
+
+        console.log(chalk.bgRed.bold(" ERROR "), chalk.redBright.bold("Error Not Found"));
+        console.log(chalk.bold.greenBright(`${OSC}${link}${ST}${label}${OSC}${ST}`));
     }
+};
+
+const errorList = {
+    err001: "Add Command Requires 2 Parameters",
+    err002: "Command Not Found",
+    err003: "Alias Not Found",
 };
 
 export default error;

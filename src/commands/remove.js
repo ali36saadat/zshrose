@@ -1,31 +1,23 @@
 import chalk from "chalk";
-import fs from "fs";
-import os from "os";
-import path from "path";
 import error from "../error-handler/error-handler.js";
+import ioHandler from "../scripts/ioHandler.js";
 
 const remove = function (name) {
-    const zshrcPath = path.join(os.homedir(), ".zshrc");
+    const IO = new ioHandler();
+    const zshFile = IO.read();
+
     const aliasRegex = new RegExp(`^\\s*alias\\s+${name}\\s*=.*$`, "m");
 
-    try {
-        if (!fs.existsSync(zshrcPath)) {
-            process.exit(1);
-        }
+    if (aliasRegex.test(zshFile)) {
+        const newZshFile = zshFile
+            .split("\n")
+            .filter((line) => !aliasRegex.test(line))
+            .join("\n");
 
-        let content = fs.readFileSync(zshrcPath, "utf-8");
-
-        if (aliasRegex.test(content)) {
-            content = content
-                .split("\n")
-                .filter((line) => !aliasRegex.test(line))
-                .join("\n");
-            fs.writeFileSync(zshrcPath, content, "utf-8");
-        } else {
-            error("Alias Not Found");
-        }
-    } catch (err) {
-        console.error(err.message);
+        IO.write(newZshFile);
+        console.log(chalk.bold.redBright("Alias Removed"));
+    } else {
+        error("err003");
     }
 };
 
