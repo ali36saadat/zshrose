@@ -1,5 +1,5 @@
-## ZSH ROSE - Alias Zsh CLI
-![ZSH ROSE - Headder](https://github.com/user-attachments/assets/faabe0ed-6337-4ed7-88c0-5c43f22a6c94)
+## ZSHROSE - Alias Zsh CLI
+![ZSHROSE - Headder](https://github.com/user-attachments/assets/faabe0ed-6337-4ed7-88c0-5c43f22a6c94)
 
 ## Quick Start
 **Requirements:** `node` 21.5.0 or higher, `npm` 10.8.3 or higher
