@@ -1,4 +1,4 @@
-## ZSHROSE - Alias Zsh CLI
+## ZSHROSE - Zsh Alias CLI
 ![ZSHROSE - Headder](https://github.com/user-attachments/assets/faabe0ed-6337-4ed7-88c0-5c43f22a6c94)
 
 ## Quick Start
