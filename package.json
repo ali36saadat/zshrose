@@ -4,9 +4,15 @@
     "description": "Zsh Alias CLI",
     "main": "src/index.js",
     "type": "module",
+    "author": "Ali36Saadat",
+    "license": "MIT",
     "scripts": {},
     "bin": {
         "zshrose": "./src/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ali36saadat/zshrose"
     },
     "keywords": [
         "zsh",
@@ -16,8 +22,6 @@
         "node.js",
         "chalk"
     ],
-    "author": "Ali36Saadat",
-    "license": "MIT",
     "dependencies": {
         "chalk": "^5.4.1",
         "gradient-string": "^3.0.0"
